@@ -1,0 +1,11 @@
+{
+	"listen http":	[
+		{"name": "default", "port": 80},
+		{"name": "wan",		"port": 81}
+	],
+	"listen https":	[
+		{"name": "default",	"port": 443,
+			"key": "./config/privkey.pem",		"cert": "./config/cacert.pem"
+		}
+	]
+}

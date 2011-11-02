@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>quickblog 首页</title>
+	<meta charset="utf-8">
+	<!-- showdown 模块 -->
+	<script src="/showdown.js"></script>
+	<!-- markdown 样式 -->
+	<link rel="stylesheet" href="/markdown.css">
+	<!-- 代码高亮 google-code-prettify -->
+	<script src="/prettify/prettify.js"></script>
+	<link rel="stylesheet" href="/prettify/prettify.css">
+	<!-- jQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<!-- 页面样式 -->
+	<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<div id="nav-head">
+	<div class="nav-link">
+		<a href="/">首页</a>
+		<a href="/article/about">关于</a>
+		<a href="/?p={{prev}}">上一页</a>
+		<a href="/?p={{next}}">下一页</a>
+	</div>
+	<div class="powerby">
+		Power By <a href="https://github.com/leizongmin/quickblog" target="_blank">quickblog</a>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<div id="main">
+{{#items}}
+	<div class="article-item">
+		<div class="article-title">
+			<h2><a href="/article/{{title}}">{{title}}</a></h2>
+			<span class="article-time">{{lastupdate}}</span>
+		</div>
+		<div class="article-content">{{content}}</div>
+	</div>
+{{/items}}
+</div>
+</body>
+<script>
+$(document).ready(function () {
+	// 解析Markdown
+	var converter = new Showdown.converter();
+	$('.article-content').each(function () {
+		var $this = $(this);
+		var html = converter.makeHtml($this.html().trim().substr(0, 300));
+		$this.html(html);
+	});
+	// 代码高亮
+	$('code, pre').addClass('prettyprint');
+	prettyPrint(); 
+	// 更新时间戳
+	$('.article-time').each(function () {
+		$this = $(this);
+		$this.html(timestamp2str(parseInt($this.text())));
+	});
+});
+// 将毫秒格式的时间转化为文本
+var timestamp2str = function (t) {
+	var d = new Date(t);
+	var ret = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
+	return ret;
+}
+</script>
+</html>
