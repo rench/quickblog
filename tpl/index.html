@@ -21,11 +21,13 @@
 	<div class="nav-link">
 		<a href="/">首页</a>
 		<a href="/article/about">关于</a>
-		<a href="{{path}}?p={{prev}}">上一页</a>
-		<a href="{{path}}?p={{next}}">下一页</a>
 	</div>
 	<div class="powerby">
 		Power By <a href="https://github.com/leizongmin/quickblog" target="_blank">quickblog</a>
+	</div>
+	<!-- RSS订阅 -->
+	<div class="rss">
+		<a href="/rss" title="RSS订阅"><img src="/images/rss.png"></a>
 	</div>
 	<div style="clear:both"></div>
 </div>
@@ -46,6 +48,11 @@
 		<div class="article-content">{{content}}</div>
 	</div>
 {{/items}}
+	<!-- 翻页导航 -->
+	<div id="page-nav">
+		<a href="{{path}}?p={{prev}}"><img src="/images/prev.png"></a>
+		<a href="{{path}}?p={{next}}"><img src="/images/next.png"></a>
+	</div>
 </div>
 </body>
 <script>
@@ -54,7 +61,7 @@ $(document).ready(function () {
 	var converter = new Showdown.converter();
 	$('.article-content').each(function () {
 		var $this = $(this);
-		var html = converter.makeHtml($this.html().trim().substr(0, 300) + '...');
+		var html = converter.makeHtml($this.html().trim().substr(0, 300) + ' ...');
 		$this.html(html);
 	});
 	// 代码高亮

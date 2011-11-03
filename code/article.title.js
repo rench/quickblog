@@ -15,7 +15,7 @@ exports.get = function (request, response, next) {
 			next();
 		else {
 			// 生成Etag
-			var etag = '' + data.lastupdate;
+			var etag = global.etag + '' + data.lastupdate;
 			request.etag(etag, function () {
 				response.setEtag(etag);
 				response.sendJSONIfAccepted({

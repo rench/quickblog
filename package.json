@@ -13,6 +13,7 @@
 	},
 	"dependencies":	{
 		"QuickWeb":		">=0.2.0",
-		"mongoskin":	"*"
+		"mongoskin":	"*",
+		"markdown":		"*"
 	}
 } 

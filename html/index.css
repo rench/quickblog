@@ -23,9 +23,19 @@ div.nav-link a {
 	padding: 2px 10px;
 	margin: 0px 2px;
 }
+div.rss {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	width: 45px;
+}
+div.rss img {
+	width: 40px;
+}
 div.powerby {
 	float: right;
 	color: #444;
+	margin-right: 40px;
 }
 div#side {
 	padding-top: 50px;
@@ -78,6 +88,14 @@ div.article-item {
 }
 .article-content {
 
+}
+div#page-nav {
+	width: 500px;
+	margin: auto;
+}
+div#page-nav img {
+	width: 128px;
+	margin: 10px 50px;
 }
 
 /** 根据屏幕宽度调整布局 */

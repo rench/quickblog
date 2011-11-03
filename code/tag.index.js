@@ -1,5 +1,5 @@
 /**
- * 标签相关操作
+ * 浏览指定标签的文章
  */
  
 exports.path = '/tag/:tags';
@@ -27,7 +27,7 @@ exports.get = function (request, response, next) {
 		else {
 			// 生成Etag
 			if (typeof data[0] != 'undefined')
-				var etag = web.util.md5(data[0]._id + data[0].lastupdate +
+				var etag = web.util.md5(global.etag + data[0]._id + data[0].lastupdate +
 					data[0].content);
 			else
 				var etag = 'empty';

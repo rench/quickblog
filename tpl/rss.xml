@@ -1,0 +1,19 @@
+<rss version="2.0">
+<channel>
+	<title>{{title}}</title>
+	<link>{{path}}</link>
+	<description>{{{description}}}</description>
+	<pubDate>{{timestamp}}</pubDate>
+	<language>zh-CN</language>
+	
+	<!-- 输出产品列表 -->
+	{{#items}}
+	<item>
+		<title><![CDATA[{{title}}]]></title>
+		<link>{{link}}</link>
+		<description><![CDATA[{{{content}}}]]></description>
+		<pubdate>{{lastupdate}}</pubdate>
+	</item>
+	{{/items}}
+	</channel>
+</rss>
