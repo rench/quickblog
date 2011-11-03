@@ -43,12 +43,16 @@ exports.put = function (request, response, next) {
 	
 	var title = request.path.title;
 	var content = request.post.content;
+	var tags = request.post.tags;
 	var _id = web.util.md5(title);
-	global.article.update({_id: _id}, {$set: {
+	var set = {
 		title:		title,
 		content:	content,
 		lastupdate:	new Date().getTime()
-	}}, function (err) {
+	}
+	if (typeof tags != 'undefined')
+		set.tags = tags;
+	global.article.update({_id: _id}, {$set: set}, function (err) {
 		if (err)
 			response.sendJSONIfAccepted({status: 0, errmsg: err.toString()}, function () {
 				response.sendError(500, err);
@@ -72,12 +76,14 @@ exports.post = function (request, response, next) {
 	
 	var title = request.path.title;
 	var content = request.post.content;
+	var tags = request.post.tags || '';
 	var timestamp = new Date().getTime();
 	var _id = web.util.md5(title);
 	global.article.save({
 		_id:		_id,
 		title:		title,
 		content:	content,
+		tags:		tags,
 		timestamp:	timestamp,
 		lastupdate:	timestamp
 	}, function (err) {

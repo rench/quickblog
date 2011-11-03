@@ -16,18 +16,26 @@
 	<link rel="stylesheet" href="/index.css">
 </head>
 <body>
+<!-- 顶部导航栏 -->
 <div id="nav-head">
 	<div class="nav-link">
 		<a href="/">首页</a>
 		<a href="/article/about">关于</a>
-		<a href="/?p={{prev}}">上一页</a>
-		<a href="/?p={{next}}">下一页</a>
+		<a href="{{path}}?p={{prev}}">上一页</a>
+		<a href="{{path}}?p={{next}}">下一页</a>
 	</div>
 	<div class="powerby">
 		Power By <a href="https://github.com/leizongmin/quickblog" target="_blank">quickblog</a>
 	</div>
 	<div style="clear:both"></div>
 </div>
+<!-- 左侧栏 -->
+<div id="side">
+{{#items}}
+	<h3><a href="/article/{{title}}">{{title}}</a></h3>
+{{/items}}
+</div>
+<!-- 文章列表 -->
 <div id="main">
 {{#items}}
 	<div class="article-item">
@@ -46,7 +54,7 @@ $(document).ready(function () {
 	var converter = new Showdown.converter();
 	$('.article-content').each(function () {
 		var $this = $(this);
-		var html = converter.makeHtml($this.html().trim().substr(0, 300));
+		var html = converter.makeHtml($this.html().trim().substr(0, 300) + '...');
 		$this.html(html);
 	});
 	// 代码高亮
@@ -56,6 +64,15 @@ $(document).ready(function () {
 	$('.article-time').each(function () {
 		$this = $(this);
 		$this.html(timestamp2str(parseInt($this.text())));
+	});
+	// 显示效果
+	$('.article-item').hover(function () {
+		$(this).addClass('article-hover');
+	}, function () {
+		$(this).removeClass('article-hover');
+	});
+	$('.article-item').click(function () {
+		window.location = $('.article-title a', this).attr('href');
 	});
 });
 // 将毫秒格式的时间转化为文本

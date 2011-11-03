@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 /**
- * mini-blog命令行工具
+ * quickblog命令行工具
  */
  
 var fs = require('fs');
@@ -45,18 +47,20 @@ var main = function () {
 			break;
 		// 帮助
 		default:
-			console.log('mini-blog命令行工具\n\
-blog \033[0;33mlist\033[0m <页号>	显示文章列表\n\
-blog \033[0;33mread\033[0m [标题]	浏览文章\n\
-blog \033[0;33mpost\033[0m [标题]	发布新文章\n\
-blog \033[0;33mupdate\033[0m [标题]	更新文章\n\
-blog \033[0;33mremove\033[0m [标题]	删除文章\n\
+			console.log('quickblog命令行工具\n\n\
+  \033[0;33mlist\033[0m <页号>			显示文章列表\n\
+  \033[0;33mread\033[0m [标题]			浏览文章\n\
+  \033[0;33mpost\033[0m [标题] <标签>		发布新文章\n\
+  \033[0;33mupdate\033[0m [标题] <标签>		更新文章\n\
+  \033[0;33mremove\033[0m [标题]			删除文章\n\
+\n在config.json中配置博客地址、用户名及密码\
 			');
 	}
 }
 
 // 登录
 var login = function (callback) {
+	console.log('正在登录...');
 	request({
 		uri:		config.url + 'login',
 		method:		'POST',
@@ -139,11 +143,11 @@ var cmdPost = function () {
 		var dir = fs.readdirSync('.');
 		for (var i in dir) {
 			if (path.extname(dir[i]) == '.md')
-				post(dir[i].substr(0, dir[i].length - 3));
+				post(dir[i].substr(0, dir[i].length - 3), process.argv[4]);
 		}
 	}
 	else {
-		post(title);
+		post(title, process.argv[4]);
 	}
 }
 
@@ -154,11 +158,11 @@ var cmdUpdate = function () {
 		var dir = fs.readdirSync('.');
 		for (var i in dir) {
 			if (path.extname(dir[i]) == '.md')
-				put(dir[i].substr(0, dir[i].length - 3));
+				put(dir[i].substr(0, dir[i].length - 3), process.argv[4]);
 		}
 	}
 	else {
-		put(title);
+		put(title, process.argv[4]);
 	}
 }
 
@@ -187,8 +191,10 @@ var cmdDelete = function () {
 	});
 }
 
-var post = function (t) {
+var post = function (t, tags) {
 	var c = fs.readFileSync(t + '.md').toString();
+	if (typeof tags == 'undefined')
+		tags = '';
 	request({
 		uri:		config.url + 'article/' + qs.escape(t),
 		method:		'POST',
@@ -197,7 +203,7 @@ var post = function (t) {
 			'Content-Type':	'application/x-www-form-urlencoded',
 			'Cookie':		session.tag + '=' + qs.escape(session.id)
 		},
-		body:		qs.stringify({content: c})
+		body:		qs.stringify({content: c, tags: tags})
 	}, function (err, response, body) {
 		if (err)
 			console.log('Error: ' + err);
@@ -209,8 +215,11 @@ var post = function (t) {
 	});
 }
 
-var put = function (t) {
+var put = function (t, tags) {
 	var c = fs.readFileSync(t + '.md').toString();
+	var body = {content: c}
+	if (typeof tags == 'string')
+		body.tags = tags;
 	request({
 		uri:		config.url + 'article/' + qs.escape(t),
 		method:		'PUT',
@@ -219,7 +228,7 @@ var put = function (t) {
 			'Content-Type':	'application/x-www-form-urlencoded',
 			'Cookie':		session.tag + '=' + qs.escape(session.id)
 		},
-		body:		qs.stringify({content: c})
+		body:		qs.stringify(body)
 	}, function (err, response, body) {
 		if (err)
 			console.log('Error: ' + err);

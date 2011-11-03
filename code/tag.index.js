@@ -1,16 +1,21 @@
 /**
- * 文章列表
+ * 标签相关操作
  */
  
-exports.path = '/';
+exports.path = '/tag/:tags';
 
 var web = global.QuickWeb;
 
+
+/**  查看指定标签下的文章 */
 exports.get = function (request, response, next) {
+	var tags = request.path.tags;
 	var p = parseInt(request.get.p);
 	if (isNaN(p) || p < 1)
 		p = 1;
-	global.article.find({}, {
+	global.article.find({
+		tags:	new RegExp('' + tags)
+	}, {
 		skip:	(p - 1) * 10,
 		limit:	10,
 		sort:	[['lastupdate', -1], ['timestamp', -1]],
