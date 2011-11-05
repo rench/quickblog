@@ -1,4 +1,4 @@
-div#nav-head {
+header#nav-head {
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -8,12 +8,12 @@ div#nav-head {
 	padding: 8px 20px;
 	box-shadow: 8px 8px 20px #8E8E8E;
 }
-div#nav-head a {
+header#nav-head a {
 	color: #333;
 	text-decoration: none;
 	font-weight: bold;
 }
-div#nav-head a:hover {
+header#nav-head a:hover {
 	color: red;
 }
 div.nav-link {
@@ -37,28 +37,28 @@ div.powerby {
 	color: #444;
 	margin-right: 40px;
 }
-div#side {
+aside#side {
 	padding-top: 50px;
 	float: left;
 	width: 300px;
 }
-div#side h3 {
+aside#side h3 {
 	font-size: 16px;
 	margin-bottom: 5px;
 }
-div#side a {
+aside#side a {
 	text-decoration: none;
 	color: #444;
 }
-div#side a:hover {
+aside#side a:hover {
 	color: red;
 }
-div#main {
+section#main {
 	padding-top: 30px;
 	float: left;
 	width: 800px;
 }
-div.article-item {
+article.article-item {
 	padding: 10px 20px;
 	margin-bottom: 50px;
 	border: 1px solid #FFF;
@@ -89,26 +89,26 @@ div.article-item {
 .article-content {
 
 }
-div#page-nav {
+footer#page-nav {
 	width: 500px;
 	margin: auto;
 }
-div#page-nav img {
+footer#page-nav img {
 	width: 128px;
 	margin: 10px 50px;
 }
 
 /** 根据屏幕宽度调整布局 */
 @media screen and (max-width: 1165px) {
-	#side {
+	aside#side {
 		display: none;
 	}
-	#main {
+	section#main {
 		margin-left: 15%;
 	}
 }
 @media screen and (max-width: 970px) {
-	#main {
+	section#main {
 		margin-left: 5%;
 	}
 }

@@ -17,8 +17,9 @@
 </head>
 <body>
 <!-- 顶部导航栏 -->
-<div id="nav-head">
+<header id="nav-head">
 	<div class="nav-link">
+		QuickWeb
 		<a href="/">首页</a>
 		<a href="/article/about">关于</a>
 	</div>
@@ -30,19 +31,19 @@
 		<a href="/rss" title="RSS订阅"><img src="/images/rss.png"></a>
 	</div>
 	<div style="clear:both"></div>
-</div>
+</header>
 <!-- 左侧栏 -->
-<div id="side">
+<aside id="side">
 	
-</div>
+</aside>
 <!-- 文章内容 -->
-<div id="main">
-	<div class="article-title">
+<section id="main">
+	<header class="article-title">
 		<h1><a href="/article/{{title}}">{{title}}</a></h1>
 		<span class="article-time">{{lastupdate}}</span>
-	</div>
-	<div class="article-content">{{content}}</div>
-</div>
+	</header>
+	<section class="article-content">{{content}}</section>
+</section>
 </body>
 <script>
 $(document).ready(function () {

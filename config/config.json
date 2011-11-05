@@ -7,5 +7,8 @@
 		{"name": "default",	"port": 443,
 			"key": "./config/privkey.pem",		"cert": "./config/cacert.pem"
 		}
-	]
+	],
+	"code path":	[	"./code",
+						"./code/examples"
+					]
 }

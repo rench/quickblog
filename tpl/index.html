@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>quickblog 首页</title>
+	<title>QuickWeb 文档</title>
 	<meta charset="utf-8">
 	<!-- showdown 模块 -->
 	<script src="/showdown.js"></script>
@@ -17,8 +17,9 @@
 </head>
 <body>
 <!-- 顶部导航栏 -->
-<div id="nav-head">
+<header id="nav-head">
 	<div class="nav-link">
+		QuickWeb
 		<a href="/">首页</a>
 		<a href="/article/about">关于</a>
 	</div>
@@ -30,30 +31,30 @@
 		<a href="/rss" title="RSS订阅"><img src="/images/rss.png"></a>
 	</div>
 	<div style="clear:both"></div>
-</div>
+</header>
 <!-- 左侧栏 -->
-<div id="side">
+<aside id="side">
 {{#items}}
 	<h3><a href="/article/{{title}}">{{title}}</a></h3>
 {{/items}}
-</div>
+</aside>
 <!-- 文章列表 -->
-<div id="main">
+<section id="main">
 {{#items}}
-	<div class="article-item">
-		<div class="article-title">
+	<article class="article-item">
+		<header class="article-title">
 			<h2><a href="/article/{{title}}">{{title}}</a></h2>
 			<span class="article-time">{{lastupdate}}</span>
-		</div>
-		<div class="article-content">{{content}}</div>
-	</div>
+		</header>
+		<section class="article-content">{{content}}</section>
+	</article>
 {{/items}}
 	<!-- 翻页导航 -->
-	<div id="page-nav">
+	<footer id="page-nav">
 		<a href="{{path}}?p={{prev}}"><img src="/images/prev.png"></a>
 		<a href="{{path}}?p={{next}}"><img src="/images/next.png"></a>
-	</div>
-</div>
+	</footer>
+</section>
 </body>
 <script>
 $(document).ready(function () {
