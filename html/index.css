@@ -83,8 +83,14 @@ article.article-item {
 .article-title a:hover {
 	color: red;
 }
-.article-time {
+.article-info {
 	margin-left: 10px;
+}
+.article-time {
+	margin-right: 30px;
+}
+.article-tags {
+
 }
 .article-content {
 

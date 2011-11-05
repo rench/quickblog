@@ -44,7 +44,10 @@
 	<article class="article-item">
 		<header class="article-title">
 			<h2><a href="/article/{{title}}">{{title}}</a></h2>
-			<span class="article-time">{{lastupdate}}</span>
+			<div class="article-info">
+				更新时间：<span class="article-time">{{lastupdate}}</span>
+				标签：<span class="article-tags">{{tags}}</span>
+			</div>
 		</header>
 		<section class="article-content">{{content}}</section>
 	</article>

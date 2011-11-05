@@ -105,14 +105,14 @@ var cmdList = function () {
 		console.log('------------------------------------------');
 		for (var i in data.items) {
 			var a = data.items[i];
-			console.log(timestamp2str(a.lastupdate) + '\t\033[0;33m' + a.title + '\033[0m');
+			console.log(timestamp2str(a.lastupdate) + '\t\033[0;33m' + a.title + '\033[0m   ' + a.tags);
 			console.log('------------------------------------------');
 		}
 	});
 }
 
 // 浏览指定文章
-var cmdRead = function () {
+var cmdRead = function () {console.log(process.argv);
 	var title = process.argv[3];
 	if (typeof title == 'undefined') {
 		console.log('未指定文章标题');
@@ -153,16 +153,15 @@ var cmdPost = function () {
 
 // 更新文章
 var cmdUpdate = function () {
-	var title = process.argv[3];
-	if (typeof title == 'undefined') {
+	if (process.argv.length < 5) {
 		var dir = fs.readdirSync('.');
 		for (var i in dir) {
 			if (path.extname(dir[i]) == '.md')
-				put(dir[i].substr(0, dir[i].length - 3), process.argv[4]);
+				put(dir[i].substr(0, dir[i].length - 3), process.argv[3]);
 		}
 	}
 	else {
-		put(title, process.argv[4]);
+		put(process.argv[3], process.argv[4]);
 	}
 }
 
